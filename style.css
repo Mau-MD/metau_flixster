@@ -8,10 +8,17 @@
 body {
   background-color: #1e293b;
   color: white;
+  background-image: url("https://tailwindcss.com/_next/static/media/1-dark@tinypng.e3eb84f764aac4ef698a06d2048839eb.png");
+  background-position: center;
 }
 
 h1 {
   margin: 1em 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+h2 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 #header {
@@ -98,6 +105,11 @@ h1 {
   cursor: pointer;
 }
 
+#search-btn {
+  margin-left: 1em;
+  padding: 0 1em;
+}
+
 .hidden {
   display: none !important;
 }
@@ -126,7 +138,7 @@ h1 {
 }
 
 .modal-content > h2 {
-  margin: 1em 0;
+  margin-bottom: 1em;
 }
 
 .modal-content > iframe {
@@ -138,6 +150,7 @@ h1 {
 
 .modal-description {
   margin-top: 1em;
+  color: rgb(221, 221, 221);
 }
 
 .modal-poster-container {

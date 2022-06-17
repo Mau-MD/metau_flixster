@@ -8,9 +8,11 @@ const movieContainer = document.querySelector("#movies-grid");
 const searchInput = document.querySelector("#search-input");
 const removeSearchButton = document.querySelector("#close-search-btn");
 const loadMoreButton = document.querySelector("#load-more-movies-btn");
+const searchButton = document.querySelector("#search-btn");
 const modalElement = document.querySelector(".modal");
 
 let page = 1;
+
 // FETCH LOGIC
 async function fetchMovies(query) {
   console.log("Fetching... " + query);
@@ -37,11 +39,12 @@ async function fetchMovies(query) {
         <img
           class="movie-poster"
           src="${imageBaseUrl}/w342${movie.poster_path}"
+          onerror="this.src='https://media.istockphoto.com/photos/popcorn-and-clapperboard-picture-id1191001701?k=20&m=1191001701&s=612x612&w=0&h=uDszifNzvgeY5QrPwWvocFOUCw8ugViuw-U8LCJ1wu8='"
           alt="${movie.title}"
           title="${movie.title}"
         />
         <div class="movie-title">${movie.title}</div>
-        <div class="movie-votes">${movie.vote_average}</div>
+        <div class="movie-votes">${movie.vote_average} ★</div>
       </div>
   `;
   });
@@ -59,16 +62,20 @@ async function getMovieVideo(id) {
   return await dataJson.json();
 }
 
-function toggleCloseButton(e) {
+function handleKeyPress(e) {
   if (searchInput.value !== "") {
     removeSearchButton.classList.remove("hidden");
   } else if (searchInput.value === "") {
     removeSearchButton.classList.add("hidden");
   }
   if (e.code === "Enter") {
-    page = 1;
-    fetchMovies(searchInput.value);
+    handleSearch();
   }
+}
+
+function handleSearch() {
+  page = 1;
+  fetchMovies(searchInput.value);
 }
 
 function handleCloseButton() {
@@ -111,7 +118,7 @@ async function handleMovieClick(id) {
       movieInfo.backdrop_path
         ? `
     <div class="modal-poster-container">
-      <img class="modal-poster" src="${imageBaseUrl}/original${movieInfo.backdrop_path}"></img>
+      <img class="modal-poster" src="${imageBaseUrl}/original${movieInfo.backdrop_path}" alt="${movieInfo.title}" title="${movieInfo.title}"></img>
     </div>
     `
         : ""
@@ -143,10 +150,11 @@ function handleOutsideModalClick() {
 }
 
 function addEventListeners() {
-  searchInput.addEventListener("keydown", toggleCloseButton);
+  searchInput.addEventListener("keydown", handleKeyPress);
   removeSearchButton.addEventListener("click", handleCloseButton);
   loadMoreButton.addEventListener("click", handleLoadMore);
   modalElement.addEventListener("click", handleOutsideModalClick);
+  searchButton.addEventListener("click", handleSearch);
 }
 
 function main() {
