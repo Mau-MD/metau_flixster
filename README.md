@@ -40,8 +40,8 @@ Deployed Application: [Flixster Deployed Site](https://mau-md.github.io/metau_fl
 
 ### Walkthrough Video
 
-https://imgur.com/a/1xd4uJc
-
+![walkthrough](https://gfycat.com/popularscaredacornweevil.gif)
+https://gfycat.com/popularscaredacornweevil.gif
 ### Reflection
 
 - Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
