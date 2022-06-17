@@ -134,16 +134,34 @@ async function handleMovieClick(id) {
       ${
         movieVideos.results.length > 0 &&
         `
-        <iframe width="${getiFrameDimension()}" height="300" src="https://www.youtube.com/embed/${
+        <iframe width="${getiFrameDimension()}" height="${Math.round(
+          (getiFrameDimension() / 16) * 9
+        )}" src="https://www.youtube.com/embed/${
           movieVideos.results[0].key
         }" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-      
       `
       }
     </div>
   `;
 }
+
+// Debounce Function
+function debounce(callback, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      callback.apply(this, args);
+    }, timeout);
+  };
+}
+
+const rerenderIFrame = debounce(() => {
+  const iframe = document.querySelector("iframe");
+  iframe.setAttribute("width", getiFrameDimension());
+  iframe.setAttribute("height", (getiFrameDimension() / 16) * 9);
+}, 200);
 
 function handleOutsideModalClick() {
   modalElement.classList.add("hidden");
@@ -155,6 +173,7 @@ function addEventListeners() {
   loadMoreButton.addEventListener("click", handleLoadMore);
   modalElement.addEventListener("click", handleOutsideModalClick);
   searchButton.addEventListener("click", handleSearch);
+  window.addEventListener("resize", rerenderIFrame);
 }
 
 function main() {
