@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   font-family: "Courier New", Courier, monospace;
+  box-sizing: border-box;
 }
 
 body {
@@ -98,20 +99,93 @@ h1 {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 1;
+  background-color: #1e293b9d;
+  display: flex;
+}
+
+.modal-container {
+  background-color: #1e293b;
+  width: 40%;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.modal-content {
+  padding: 3em;
+}
+
+.modal-content > h2 {
+  margin: 1em 0;
+}
+
+.modal-content > iframe {
+  margin-top: 1em;
+}
+.modal-title {
+  font-size: 32px;
+}
+
+.modal-description {
+  margin-top: 1em;
+}
+
+.modal-poster-container {
+  width: 100%;
+  height: 300px;
+}
+.modal-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+@media screen and (max-width: 1200px) {
+  #movies-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #movies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+  }
+
+  .modal-container {
+    width: 60%;
+  }
 }
 
 @media screen and (max-width: 800px) {
   #movies-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1em;
+  }
+
+  .modal-container {
+    width: 80%;
   }
 }
 @media screen and (max-width: 600px) {
   #movies-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(1, 1fr);
     gap: 1em;
   }
 
